@@ -64,7 +64,7 @@ def process_song_data(spark, input_data, output_data):
     artists_table.write.mode('overwrite').parquet(os.path.join(output_data,"artists"))
     
     #Extract song_df for future use
-    song_df = df.select('artist_id','artist_name','song_id','title')
+    song_df = df.select('artist_id','artist_name','song_id','title').dropDuplicates()
     song_df.write.mode('overwrite').parquet(os.path.join(output_data,"song_df"))
 
 
